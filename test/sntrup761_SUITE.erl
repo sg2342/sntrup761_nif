@@ -32,7 +32,7 @@ kat(Config) ->
     K = binary:decode_hex(SS).
 
 
-e2e(Config) ->
+e2e(_Config) ->
     {PK, SK} = sntrup761:keypair(),
     {CT, K} = sntrup761:encap(PK),
     K = sntrup761:decap(CT, SK).
