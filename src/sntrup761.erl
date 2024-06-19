@@ -1,5 +1,13 @@
 -module(sntrup761).
 
+-moduledoc """
+
+Streamlined NTRU Prime: sntrup761 NIF
+
+https://www.ietf.org/archive/id/draft-josefsson-ntruprime-streamlined-00.html
+
+""".
+
 -export([keypair/0, encap/1, decap/2]).
 
 -type pk() :: <<_:9264>>.
@@ -9,17 +17,30 @@
 
 -export_type([pk/0, sk/0, ct/0, k/0]).
 
+-doc """
+key generation
+
+https://www.ietf.org/archive/id/draft-josefsson-ntruprime-streamlined-00.html#section-2
+""".
 %% pk,sk = KEM_KeyGen()
 -spec keypair() -> {pk(), sk()}.
 keypair() -> sntrup761_nif:keypair().
 
+-doc """
+encapsulation
 
+https://www.ietf.org/archive/id/draft-josefsson-ntruprime-streamlined-00.html#section-3
+""".
 %% c,k = Encap(pk)
 -spec encap(pk()) -> {ct(), k()}.
 encap(PK) when is_binary(PK), byte_size(PK) == 1158 ->
     sntrup761_nif:encap(PK).
 
+-doc """
+decapsulation
 
+https://www.ietf.org/archive/id/draft-josefsson-ntruprime-streamlined-00.html#section-4
+""".
 %% k = Decap(c,sk)
 -spec decap(ct(), sk()) -> k().
 decap(CT, SK)

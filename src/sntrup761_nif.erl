@@ -1,5 +1,7 @@
 -module(sntrup761_nif).
 
+-moduledoc false.
+
 -export([keypair/0, encap/1, decap/2]).
 
 -on_load(init/0).
